@@ -1,16 +1,37 @@
-package ir.mmghteam.quizapp;
+package ir.mmghteam.quizapp.Controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import ir.mmghteam.quizapp.Model.Question;
+import ir.mmghteam.quizapp.Service.QuestionService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/question")
 public class QuestionController {
+    @Autowired
+    private QuestionService questionService;
 
     @GetMapping("/allQuestions")
-    public String getAllQuestion(){
-        return "Hello";
+    public ResponseEntity<List<Question>> getAllQuestion(){
+        return questionService.getAllQuestion();
     }
+    @GetMapping("category/{category}")
+    public List<Question> getQuestionByCategory(@PathVariable String category){
+        return questionService.getQuestionByCategory(category);
+    }
+    @PostMapping("add")
+    public String addQuestion(@RequestBody Question question){
+        return questionService.addQuestion(question);
+    }
+    @DeleteMapping("delete/{id}")
+    public String deleteQuestion(@PathVariable Integer id){
+        return questionService.deleteQuestion(id);
+    }
+
 
 }
