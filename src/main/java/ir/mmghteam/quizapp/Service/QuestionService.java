@@ -36,6 +36,7 @@ public class QuestionService {
 
     public ResponseEntity<String> addQuestion(Question question) {
         questionDAO.save(question);
+        // The idea is to change the response code from 200 to 201(created)
         return new ResponseEntity<>("Question added successfully", HttpStatus.CREATED);
     }
     public String deleteQuestion(int id) {

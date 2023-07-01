@@ -26,7 +26,7 @@ public class QuestionController {
     }
     @PostMapping("add")
     public ResponseEntity<String> addQuestion(@RequestBody Question question){
-        return  questionService.addQuestion(question);
+        return questionService.addQuestion(question);
     }
     @DeleteMapping("delete/{id}")
     public String deleteQuestion(@PathVariable Integer id){
